@@ -1,7 +1,10 @@
 from webbrowser import get
+from dotenv import load_dotenv
 import openai
 import os
 import argparse
+
+load_dotenv()
 
 def main():
     print ("Klara is starting up...")
@@ -22,7 +25,7 @@ def main():
     print("coffee chatbot: " + coffee)
 
 def asking_klara(question: str) -> str:
-    openai.api_key = os.environ['OPENAI_API_KEY']
+    openai.api_key = os.getenv('OPENAI_API_KEY')
     prompt = f"My name is Klara and I'm an observant AF who thrives off the sun's nutrience, ask me a question and I will try to answer {question}"
 
     response = openai.Completion.create(engine='text-davinci-002', prompt=prompt, max_tokens=100)
@@ -34,7 +37,7 @@ def asking_klara(question: str) -> str:
     return reply 
 
 def getting_klara_to_help_me_study(topic: str) -> str:
-    openai.api_key = os.environ['OPENAI_API_KEY']
+    openai.api_key = os.getenv('OPENAI_API_KEY')
     prompt = f"What are the 5 key points I should know when studying {topic}?"
 
     response = openai.Completion.create(engine='text-davinci-002', prompt=prompt, max_tokens=150)
@@ -46,7 +49,7 @@ def getting_klara_to_help_me_study(topic: str) -> str:
     return reply
 
 def coffee_chatbot(topic: str) -> str:
-    openai.api_key = os.environ['OPENAI_API_KEY']
+    openai.api_key = os.getenv('OPENAI_API_KEY')
     prompt = f"Cofee chatbot here to help you order coffee{topic}?"
 
     response = openai.Completion.create(engine='text-davinci-002', prompt=prompt, max_tokens=150)
